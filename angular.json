@@ -10,7 +10,8 @@
       "prefix": "comicz",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "sass"
+          "style": "scss",
+          "inlineTemplate": true
         }
       },
       "architect": {
