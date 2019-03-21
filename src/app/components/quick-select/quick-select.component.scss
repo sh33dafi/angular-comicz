@@ -1,0 +1,21 @@
+@import "../../../styles/typography";
+@import "../../../styles/colors";
+
+.quick-select {
+  font-size: 1em;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__list {
+    list-style: none;
+    display: flex;
+  }
+
+  &__list-item {
+    margin: 0 5px;
+    cursor: pointer;
+  }
+}

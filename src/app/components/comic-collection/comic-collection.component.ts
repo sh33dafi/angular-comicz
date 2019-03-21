@@ -7,8 +7,9 @@ import {ComicSeries} from '../../model/comic-series.model';
     <ul class='comic-collection'>
       <li class='comic-collection__item'
           *ngFor='let comicSerie of comicSeries'>
-        <img src='{{comicSerie.image}}'>
-        <!-- TODO replace with <comicz-poster> -->
+        <comicz-comic-poster
+          [title]='comicSerie.title'
+          [image]='comicSerie.image'></comicz-comic-poster>
       </li>
     </ul>
   `,

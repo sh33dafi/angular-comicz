@@ -1,0 +1,13 @@
+@import "../../../styles/typography";
+@import "../../../styles/colors";
+
+.header {
+  font-size: 1.2em;
+  font-weight: $font-weight-bold;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid $border-color;
+}
