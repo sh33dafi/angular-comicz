@@ -18,9 +18,6 @@ export class ComicCollectionComponent implements OnInit {
   // Todo define the list of series in app.component.ts and provide comicSeries as an @Input
   comicSeries: Array<ComicSeries> = [];
 
-  constructor() {
-  }
-
   ngOnInit() {
     this.comicSeries.push({title: 'Urbanus', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries);
     this.comicSeries.push({title: 'Suske en Wiske', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries);

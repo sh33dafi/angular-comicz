@@ -1,4 +1,4 @@
-export interface Comic {
+export interface ComicSeries {
   title: string;
   image?: string;
 }

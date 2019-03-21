@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'comicz-root',
-  templateUrl: './app.component.html',
+  template: `
+    <!--comicz-header-->
+    <!--comicz-quick-select -->
+    <comicz-comic-collection></comicz-comic-collection>
+  `,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-comicz';
 }
