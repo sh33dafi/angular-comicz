@@ -15,7 +15,6 @@ import {ComicSeries} from '../../model/comic-series.model';
   styleUrls: ['./comic-collection.component.scss']
 })
 export class ComicCollectionComponent implements OnInit {
-  // Todo define the list of series in app.component.ts and provide comicSeries as an @Input
   comicSeries: Array<ComicSeries> = [];
 
   ngOnInit() {
