@@ -4,21 +4,10 @@ import {Component} from '@angular/core';
   selector: 'comicz-root',
   template: `
     <comicz-header></comicz-header>
-    <comicz-quick-select
-      (selectCollection)='onCollectionSelected($event)'
-      (selectWholeCollection)='onWholeCollectionSelected()'
-    ></comicz-quick-select>
-    <comicz-comic-collection></comicz-comic-collection>
+    <comicz-comic-overview></comicz-comic-overview>
   `,
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.container.scss']
 })
-export class AppComponent {
+export class AppContainer {
 
-  onCollectionSelected(letter: string) {
-    console.log(`The collection ${letter} is selected`);
-  }
-
-  onWholeCollectionSelected() {
-    console.log('The whole collection is selected');
-  }
 }

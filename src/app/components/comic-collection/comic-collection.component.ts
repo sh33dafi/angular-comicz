@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {ComicSeries} from '../../model/comic-series.model';
 
 @Component({
@@ -15,16 +15,8 @@ import {ComicSeries} from '../../model/comic-series.model';
   `,
   styleUrls: ['./comic-collection.component.scss']
 })
-export class ComicCollectionComponent implements OnInit {
-  comicSeries: Array<ComicSeries> = [];
-
-  ngOnInit() {
-    this.comicSeries.push({title: 'Urbanus', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries);
-    this.comicSeries.push({title: 'Suske en Wiske', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries);
-    this.comicSeries.push({title: 'Amoras', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries);
-    this.comicSeries.push({title: 'Jommeke', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries);
-    this.comicSeries.push({title: 'Nero', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries);
-    this.comicSeries.push({title: 'Kuifje', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries);
-  }
+export class ComicCollectionComponent {
+  @Input()
+  comicSeries: Array<ComicSeries>;
 
 }
