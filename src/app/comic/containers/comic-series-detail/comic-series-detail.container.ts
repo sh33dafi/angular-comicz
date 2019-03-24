@@ -1,15 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {map, switchMap, take, takeUntil} from 'rxjs/operators';
-import {Observable, Subject} from 'rxjs';
+import {map, switchMap, takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 import {ComicService} from '../../service/comic.service';
 import {ComicSeries} from '../../model/comic-series.model';
 
 @Component({
   selector: 'comicz-comic-series-detail',
   template: `
-    <h1>{{seriesDetail.title}} - {{seriesDetail.author}}</h1>
-    <comicz-comic-collection [comicSeries]='seriesDetail.comics'></comicz-comic-collection>
+    <div *ngIf='seriesDetail'>
+      <h1>{{seriesDetail.title}} - {{seriesDetail.author}}</h1>
+      <comicz-comic-collection [comicSeries]='seriesDetail.comics'></comicz-comic-collection>
+    </div>
   `,
   styleUrls: ['./comic-series-detail.container.scss']
 })
