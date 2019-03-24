@@ -1,9 +1,9 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {AppContainer} from './app.container';
-import {ComicModule} from './comic/comic.module';
 import {HeaderComponent} from './components/header/header.component';
 import {AppRoutergModule} from './app-router.module';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,8 +12,8 @@ import {AppRoutergModule} from './app-router.module';
   ],
   imports: [
     BrowserModule,
-    ComicModule,
-    AppRoutergModule
+    AppRoutergModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppContainer]

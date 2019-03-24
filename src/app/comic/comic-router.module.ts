@@ -4,12 +4,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {ComicSeriesDetailContainer} from './containers/comic-series-detail/comic-series-detail.container';
 
 export const routes: Routes = [
-  {
-    path: 'series', children: [
-      {path: 'overview', component: ComicOverviewContainer},
-      {path: ':id', component: ComicSeriesDetailContainer}
-    ]
-  }
+  {path: 'overview', component: ComicOverviewContainer},
+  {path: ':id', component: ComicSeriesDetailContainer}
 ];
 
 @NgModule({

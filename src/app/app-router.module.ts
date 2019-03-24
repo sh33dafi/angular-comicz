@@ -1,11 +1,14 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
-export const routes: Routes = [{path: '', pathMatch: 'full', redirectTo: 'series/overview'}];
+export const routes: Routes = [
+  {path: '', pathMatch: 'full', redirectTo: 'series/overview'},
+  {path: 'series', loadChildren: './comic/comic.module#ComicModule'}
+  ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules}),
   ],
   exports: [
     RouterModule
