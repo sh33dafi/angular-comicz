@@ -3,6 +3,7 @@ import {ComicSeries} from '../../model/comic-series.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
 import {ComicService} from '../../service/comic.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'comicz-comic-overview',
@@ -11,7 +12,8 @@ import {ComicService} from '../../service/comic.service';
       (selectCollection)='onCollectionSelected($event)'
       (selectWholeCollection)='onWholeCollectionSelected()'
     ></comicz-quick-select>
-    <comicz-comic-collection [comicSeries]='filteredComicSeries$ | async'></comicz-comic-collection>
+    <comicz-comic-collection [comicSeries]='filteredComicSeries$ | async'
+                             (posterSelected)='onPosterSelected($event)'></comicz-comic-collection>
   `,
   styleUrls: ['./comic-overview.container.scss']
 })
@@ -19,7 +21,7 @@ export class ComicOverviewContainer implements OnInit {
   public filter$: BehaviorSubject<string> = new BehaviorSubject('');
   public filteredComicSeries$: Observable<Array<ComicSeries>>;
 
-  constructor(private comicService: ComicService) {
+  constructor(private comicService: ComicService, private router: Router) {
   }
 
   ngOnInit() {
@@ -47,6 +49,10 @@ export class ComicOverviewContainer implements OnInit {
 
   onWholeCollectionSelected() {
     this.filter$.next('');
+  }
+
+  onPosterSelected(id: number) {
+    this.router.navigate(['series', id]);
   }
 
 }
