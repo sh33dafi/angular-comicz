@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ComicSeries} from '../../model/comic-series.model';
 
 @Component({
@@ -9,7 +9,9 @@ import {ComicSeries} from '../../model/comic-series.model';
           *ngFor='let comicSerie of comicSeries'>
         <comicz-comic-poster
           [title]='comicSerie.title'
-          [image]='comicSerie.image'></comicz-comic-poster>
+          [image]='comicSerie.image'
+          [id]='comicSerie.id'
+          (posterSelected)='posterSelected.emit($event)'></comicz-comic-poster>
       </li>
     </ul>
   `,
@@ -18,5 +20,8 @@ import {ComicSeries} from '../../model/comic-series.model';
 export class ComicCollectionComponent {
   @Input()
   comicSeries: Array<ComicSeries>;
+
+  @Output()
+  posterSelected = new EventEmitter<number>();
 
 }

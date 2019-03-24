@@ -4,7 +4,7 @@ import {Component} from '@angular/core';
   selector: 'comicz-root',
   template: `
     <comicz-header></comicz-header>
-    <comicz-comic-overview></comicz-comic-overview>
+    <router-outlet></router-outlet>
   `,
   styleUrls: ['./app.container.scss']
 })

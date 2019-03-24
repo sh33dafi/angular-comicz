@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 import {AppContainer} from './app.container';
 import {ComicModule} from './comic/comic.module';
 import {HeaderComponent} from './components/header/header.component';
+import {AppRoutergModule} from './app-router.module';
 
 @NgModule({
   declarations: [
@@ -11,7 +12,8 @@ import {HeaderComponent} from './components/header/header.component';
   ],
   imports: [
     BrowserModule,
-    ComicModule
+    ComicModule,
+    AppRoutergModule
   ],
   providers: [],
   bootstrap: [AppContainer]

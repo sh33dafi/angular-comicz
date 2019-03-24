@@ -1,9 +1,10 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'comicz-comic-poster',
   template: `
-    <div class='comic-poste'>
+    <div class="comic-poster"
+    (click)='posterSelected.emit(id)'>
       <img src='{{image}}' [alt]='title'>
       <span>{{title}}</span>
     </div>
@@ -16,5 +17,11 @@ export class ComicPosterComponent {
 
   @Input()
   image: string;
+
+  @Input()
+  id: number;
+
+  @Output()
+  posterSelected = new EventEmitter<number>();
 
 }

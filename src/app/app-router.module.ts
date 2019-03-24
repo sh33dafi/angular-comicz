@@ -1,19 +1,15 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {AppContainer} from './app.container';
-import {ComicModule} from './comic/comic.module';
-import {HeaderComponent} from './components/header/header.component';
+import {RouterModule, Routes} from '@angular/router';
+
+export const routes: Routes = [{path: '', pathMatch: 'full', redirectTo: 'series/overview'}];
 
 @NgModule({
-  declarations: [
-    AppContainer,
-    HeaderComponent,
-  ],
   imports: [
-    BrowserModule,
-    ComicModule
+    RouterModule.forRoot(routes),
   ],
-  providers: [],
-  bootstrap: [AppContainer]
+  exports: [
+    RouterModule
+  ]
 })
-export class AppModule { }
+export class AppRoutergModule {
+}

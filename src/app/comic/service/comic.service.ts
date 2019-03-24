@@ -19,4 +19,9 @@ export class ComicService {
     }
     return this.httpClient.get<Array<ComicSeries>>(url);
   }
+
+  getSeriesDetail(id: number): Observable<ComicSeries> {
+    const url = `${ComicService.BASE_URL}/series/${id}`;
+    return this.httpClient.get<ComicSeries>(url);
+  }
 }
