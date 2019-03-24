@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ComicSeries} from '../../model/comic-series.model';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
+import {ComicService} from '../../service/comic.service';
 
 @Component({
   selector: 'comicz-comic-overview',
@@ -15,20 +16,13 @@ import {debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/oper
   styleUrls: ['./comic-overview.container.scss']
 })
 export class ComicOverviewContainer implements OnInit {
-  private initialComicSeries: Array<ComicSeries> = [];
-
   public filter$: BehaviorSubject<string> = new BehaviorSubject('');
   public filteredComicSeries$: Observable<Array<ComicSeries>>;
 
+  constructor(private comicService: ComicService) {
+  }
+
   ngOnInit() {
-    this.initialComicSeries = [
-      {title: 'Urbanus', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries,
-      {title: 'Suske en Wiske', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries,
-      {title: 'Amoras', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries,
-      {title: 'Jommeke', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries,
-      {title: 'Nero', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries,
-      {title: 'Kuifje', image: 'https://via.placeholder.com/200x280.png'} as ComicSeries
-    ];
 
     const alfabetical = (comicSerie1: ComicSeries, comicSerie2: ComicSeries) => {
       return comicSerie1.title.localeCompare(comicSerie2.title);
@@ -38,13 +32,13 @@ export class ComicOverviewContainer implements OnInit {
       tap(t => console.log(t)),
       distinctUntilChanged(),
       debounceTime(200),
-      switchMap(filter => of(this.filterSeries(filter))),
+      switchMap(filter => this.filterSeries(filter)),
       map(comicSeries => comicSeries.sort(alfabetical))
     );
   }
 
-  private filterSeries(filter): Array<ComicSeries> {
-    return this.initialComicSeries.filter(comicsSerie => comicsSerie.title.toUpperCase().startsWith(filter));
+  private filterSeries(filter): Observable<Array<ComicSeries>> {
+    return this.comicService.getAllComicSeries(filter);
   }
 
   onCollectionSelected(letter: string) {
