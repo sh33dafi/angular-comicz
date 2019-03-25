@@ -1,0 +1,32 @@
+@import "../../../../styles/colors";
+.fab {
+  width: 70px;
+  height: 70px;
+  background-color: $accent-color;
+  border-radius: 50%;
+  box-shadow: 0 6px 10px 0 $shadow-color;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  transition: all 0.1s ease-in-out;
+
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 6px 14px 0 $shadow-color;
+    transform: scale(1.05);
+  }
+
+  &__text {
+    font-size: 50px;
+    color: white;
+    user-select: none;
+  }
+}
+
+

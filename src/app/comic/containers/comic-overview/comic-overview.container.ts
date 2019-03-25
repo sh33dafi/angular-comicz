@@ -3,7 +3,7 @@ import {ComicSeries} from '../../model/comic-series.model';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
 import {ComicService} from '../../service/comic.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'comicz-comic-overview',
@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
     ></comicz-quick-select>
     <comicz-comic-collection [comicSeries]='filteredComicSeries$ | async'
                              (posterSelected)='onPosterSelected($event)'></comicz-comic-collection>
+    <comicz-fab-button (click)='addNewSeries()'></comicz-fab-button>
   `,
   styleUrls: ['./comic-overview.container.scss']
 })
@@ -21,7 +22,7 @@ export class ComicOverviewContainer implements OnInit {
   public filter$: BehaviorSubject<string> = new BehaviorSubject('');
   public filteredComicSeries$: Observable<Array<ComicSeries>>;
 
-  constructor(private comicService: ComicService, private router: Router) {
+  constructor(private comicService: ComicService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -52,7 +53,11 @@ export class ComicOverviewContainer implements OnInit {
   }
 
   onPosterSelected(id: number) {
-    this.router.navigate(['series', id]);
+    this.router.navigate(['..', id], {relativeTo: this.route});
+  }
+
+  addNewSeries() {
+    this.router.navigate(['..', 'add'], {relativeTo: this.route});
   }
 
 }

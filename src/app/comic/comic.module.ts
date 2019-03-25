@@ -7,6 +7,8 @@ import {ComicOverviewContainer} from './containers/comic-overview/comic-overview
 import {HttpClientModule} from '@angular/common/http';
 import {ComicRouterModule} from './comic-router.module';
 import {ComicSeriesDetailContainer} from './containers/comic-series-detail/comic-series-detail.container';
+import {FabButtonComponent} from './components/fab-button/fab-button.component';
+import {ComicSeriesCreateContainer} from './containers/comic-series-create/comic-series-create.container';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import {ComicSeriesDetailContainer} from './containers/comic-series-detail/comic
     ComicPosterComponent,
     QuickSelectComponent,
     ComicOverviewContainer,
-    ComicSeriesDetailContainer
+    ComicSeriesDetailContainer,
+    FabButtonComponent,
+    ComicSeriesCreateContainer
   ],
   imports: [
     CommonModule,
@@ -22,4 +26,5 @@ import {ComicSeriesDetailContainer} from './containers/comic-series-detail/comic
     ComicRouterModule
   ]
 })
-export class ComicModule { }
+export class ComicModule {
+}
