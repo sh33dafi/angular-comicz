@@ -24,4 +24,8 @@ export class ComicService {
     const url = `${ComicService.BASE_URL}/series/${id}`;
     return this.httpClient.get<ComicSeries>(url);
   }
+
+  createSeries(comicSeris: ComicSeries): Observable<ComicSeries> {
+    return this.httpClient.post<ComicSeries>(`${ComicService.BASE_URL}/series`, comicSeris);
+  }
 }

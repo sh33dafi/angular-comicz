@@ -9,6 +9,8 @@ import {ComicRouterModule} from './comic-router.module';
 import {ComicSeriesDetailContainer} from './containers/comic-series-detail/comic-series-detail.container';
 import {FabButtonComponent} from './components/fab-button/fab-button.component';
 import {ComicSeriesCreateContainer} from './containers/comic-series-create/comic-series-create.container';
+import {SeriesCreateFormComponent} from './components/series-create-form/series-create-form.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,12 +20,15 @@ import {ComicSeriesCreateContainer} from './containers/comic-series-create/comic
     ComicOverviewContainer,
     ComicSeriesDetailContainer,
     FabButtonComponent,
-    ComicSeriesCreateContainer
+    ComicSeriesCreateContainer,
+    SeriesCreateFormComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    ComicRouterModule
+    ComicRouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class ComicModule {
