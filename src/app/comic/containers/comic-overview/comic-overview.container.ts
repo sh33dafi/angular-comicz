@@ -1,12 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ComicSeries} from '../../model/comic-series.model';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 import {ComicService} from '../../service/comic.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {LoadComicsAction, LoadComicsSuccessAction} from '../../reducers/actions';
-import {State} from '../../reducers';
 import {RootState} from '../../../reducers';
 
 @Component({
@@ -23,8 +22,8 @@ import {RootState} from '../../../reducers';
   `,
   styleUrls: ['./comic-overview.container.scss']
 })
-export class ComicOverviewContainer implements OnInit {
-  public filter$: BehaviorSubject<string> = new BehaviorSubject('');
+export class ComicOverviewContainer implements OnInit, OnDestroy {
+  public destroy$ = new Subject<boolean>();
   public filteredComicSeries$: Observable<Array<ComicSeries>>;
   private isLoading$: Observable<boolean>;
 
@@ -40,6 +39,9 @@ export class ComicOverviewContainer implements OnInit {
   private loadComics(filter: string = '') {
     this.store.dispatch(new LoadComicsAction());
     this.comicService.getAllComicSeries(filter)
+      .pipe(
+        takeUntil(this.destroy$)
+      )
       .subscribe(comics => this.store.dispatch(new LoadComicsSuccessAction(comics)));
   }
 
@@ -57,6 +59,11 @@ export class ComicOverviewContainer implements OnInit {
 
   addNewSeries() {
     this.router.navigate(['..', 'add'], {relativeTo: this.route});
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
 }
