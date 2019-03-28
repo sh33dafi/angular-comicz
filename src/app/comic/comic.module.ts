@@ -11,6 +11,8 @@ import {FabButtonComponent} from './components/fab-button/fab-button.component';
 import {ComicSeriesCreateContainer} from './containers/comic-series-create/comic-series-create.container';
 import {SeriesCreateFormComponent} from './components/series-create-form/series-create-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {StoreModule} from '@ngrx/store';
+import {comicSeriesReducer} from './reducers';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     HttpClientModule,
     ComicRouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StoreModule.forFeature('comics', comicSeriesReducer)
   ]
 })
 export class ComicModule {

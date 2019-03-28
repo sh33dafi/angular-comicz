@@ -4,10 +4,15 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
 import {ComicService} from '../../service/comic.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Store} from '@ngrx/store';
+import {LoadComicsAction, LoadComicsSuccessAction} from '../../reducers/actions';
+import {State} from '../../reducers';
+import {RootState} from '../../../reducers';
 
 @Component({
   selector: 'comicz-comic-overview',
   template: `
+    <h1 *ngIf='isLoading$ | async'>Loading</h1>
     <comicz-quick-select
       (selectCollection)='onCollectionSelected($event)'
       (selectWholeCollection)='onWholeCollectionSelected()'
@@ -21,35 +26,29 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class ComicOverviewContainer implements OnInit {
   public filter$: BehaviorSubject<string> = new BehaviorSubject('');
   public filteredComicSeries$: Observable<Array<ComicSeries>>;
+  private isLoading$: Observable<boolean>;
 
-  constructor(private comicService: ComicService, private router: Router, private route: ActivatedRoute) {
+  constructor(private comicService: ComicService, private router: Router, private route: ActivatedRoute, private store: Store<RootState>) {
+    this.isLoading$ = this.store.select(state => state.comics.isLoading);
+    this.filteredComicSeries$ = this.store.select(state => state.comics.comicSeries);
   }
 
   ngOnInit() {
-
-    const alfabetical = (comicSerie1: ComicSeries, comicSerie2: ComicSeries) => {
-      return comicSerie1.title.localeCompare(comicSerie2.title);
-    };
-
-    this.filteredComicSeries$ = this.filter$.pipe(
-      tap(t => console.log(t)),
-      distinctUntilChanged(),
-      debounceTime(200),
-      switchMap(filter => this.filterSeries(filter)),
-      map(comicSeries => comicSeries.sort(alfabetical))
-    );
+    this.loadComics('');
   }
 
-  private filterSeries(filter): Observable<Array<ComicSeries>> {
-    return this.comicService.getAllComicSeries(filter);
+  private loadComics(filter: string = '') {
+    this.store.dispatch(new LoadComicsAction());
+    this.comicService.getAllComicSeries(filter)
+      .subscribe(comics => this.store.dispatch(new LoadComicsSuccessAction(comics)));
   }
 
   onCollectionSelected(letter: string) {
-    this.filter$.next(letter);
+    this.loadComics(letter);
   }
 
   onWholeCollectionSelected() {
-    this.filter$.next('');
+    this.loadComics();
   }
 
   onPosterSelected(id: number) {
