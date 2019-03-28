@@ -1,9 +1,9 @@
 export interface ComicSeries {
-  id: number;
+  id?: number;
   title: string;
   image?: string;
   author?: string;
-  comics: Array<Comic>;
+  comics?: Array<Comic>;
 }
 
 export interface Comic {
